@@ -8,9 +8,11 @@ class IPFunctions():
     def check_base_config(self):
         dictionary = {}
         file_config = 'IP_BASE.txt'
-        directory = os.path.join(os.getcwd(), file_config)
+        file_directory = 'DATA_Inf'
+        dir_route = os.path.join(os.getcwd(), file_directory)
+        file_route = os.path.join(dir_route, file_config)
         try:
-            with open(directory, 'r') as file:
+            with open(file_route, 'r') as file:
                 for items in file:
                     name, data = items.strip().split(': ')
                     dictionary[name] = data

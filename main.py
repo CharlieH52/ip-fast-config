@@ -1,6 +1,3 @@
-import os
-
-from time import sleep
 from IPFunctions import IPFunctions
 
 method_manager = IPFunctions()
