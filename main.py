@@ -1,5 +1,8 @@
 from IPFunctions import IPFunctions
 
+# Compilation code:
+# COPY: pyinstaller --clean --onefile --distpath="D:\Documentos\Portfoil-Programacion\OUTPUT-FILES\CONFIGURADOR-IP" --name=Configurar-IP-x64 main.py
+
 method_manager = IPFunctions()
 ip_input = input("Ingresa la nueva direccion: ")
 time_reboot = 0
