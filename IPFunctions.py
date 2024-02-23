@@ -17,7 +17,7 @@ class IPFunctions():
                     name, data = items.strip().split(': ')
                     dictionary[name] = data
         except FileNotFoundError as e:
-            print(f'Ocurrio un problema al leer el archivo: {file_config}\n'
+            print(f'Ocurrio un problema al leer el archivo {file_config}:\n'
                   f'{e}\n'
                   )
         return dictionary
@@ -25,10 +25,16 @@ class IPFunctions():
     def command_execute(self, command_sequence):
         subprocess.run(command_sequence, shell=True)
 
-    def config_ip(self, input):
+    def config_ip(self, input, reboot):
         dictionary = self.dictionary()
-        command = ['netsh', 'interface', 'ipv4', 'set', 'address', f'{dictionary['NAME']}', 'static', f'{dictionary['IP']}{input}', f'{dictionary['MASK']}', f'{dictionary['GATE']}', 'store=persistent']
-        self.command_execute(command)
+        
+        if reboot == 0:
+            command = ['netsh', 'interface', 'ipv4', 'set', 'address', f'{dictionary['NAME']}', 'static', f'{dictionary['IP']}{input}', f'{dictionary['MASK']}', f'{dictionary['GATE']}', 'store=persistent']
+            self.command_execute(command)
+
+        if reboot == 1:
+            command = ['netsh', 'interface', 'ipv4', 'set', 'address', f'{dictionary['NAME']}', 'static', f'{dictionary['IP']}{input}', 'store=persistent']
+            self.command_execute(command)
 
     def config_dns(self, dictionary):
         self.check_base_config()
