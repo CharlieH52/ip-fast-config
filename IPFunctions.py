@@ -5,19 +5,24 @@ class IPFunctions():
     def __init__(self):
         self.dictionary = self.check_base_config()
 
+    def route_searcher(self, directory_name, file_name):
+        directory_route = os.path.join(os.getcwd(), directory_name)
+        file_route = os.path.join(directory_route, file_name)
+        dir_list = [directory_route, file_route]
+        return dir_list
+
     def check_base_config(self):
         dictionary = {}
-        file_config = 'IP_BASE.txt'
-        file_directory = 'DATA_Inf'
-        dir_route = os.path.join(os.getcwd(), file_directory)
-        file_route = os.path.join(dir_route, file_config)
+        directory_name = 'DATA_Inf'
+        file_name = 'IP_BASE.txt'
+        directory = self.route_searcher(directory_name, file_name)
         try:
-            with open(file_route, 'r') as file:
+            with open(directory[1], 'r') as file:
                 for items in file:
                     name, data = items.strip().split(': ')
                     dictionary[name] = data
         except FileNotFoundError as e:
-            print(f'Ocurrio un problema al leer el archivo {file_config}:\n'
+            print(f'Ocurrio un problema al leer el archivo {file_name}:\n'
                   f'{e}\n'
                   )
         return dictionary
