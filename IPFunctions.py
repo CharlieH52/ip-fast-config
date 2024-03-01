@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-class IPFunctions():
+class IPFunctions:
     def __init__(self):
         self.dictionary = self.check_base_config()
 
@@ -23,16 +23,14 @@ class IPFunctions():
         return dictionary
         
     def command_execute(self, command_sequence):
-        subprocess.run(command_sequence, shell=True)
+        subprocess.run(command_sequence)
 
     def config_ip(self, input):
-        dictionary = self.dictionary()
-        command = ['netsh', 'interface', 'ipv4', 'set', 'address', f'{dictionary['NAME']}', 'static', f'{dictionary['IP']}{input}', f'{dictionary['MASK']}', f'{dictionary['GATE']}', 'store=persistent']
+        command = ['netsh', 'interface', 'ipv4', 'set', 'address', f'{self.dictionary['NAME']}', 'static', f'{self.dictionary['IP']}{input}', f'{self.dictionary['MASK']}', f'{self.dictionary['GATE']}', 'store=persistent']
         self.command_execute(command)
 
-    def config_dns(self, dictionary):
-        self.check_base_config()
-        command_DNS1 = ['netsh', 'interface', 'ipv4', 'set', 'dnsservers', f'{dictionary['NAME']}', 'static', f'{dictionary['DNS1']}', 'primary']
+    def config_dns(self):
+        command_DNS1 = ['netsh', 'interface', 'ipv4', 'set', 'dnsservers', f'{self.dictionary['NAME']}', 'static', f'{self.dictionary['DNS1']}', 'primary']
         self.command_execute(command_DNS1)
-        command_DNS2 = ['netsh', 'interface', 'ipv4', 'add', 'dnsservers', f'{dictionary['NAME']}', f'{dictionary['DNS2']}']
+        command_DNS2 = ['netsh', 'interface', 'ipv4', 'add', 'dnsservers', f'{self.dictionary['NAME']}', f'{self.dictionary['DNS2']}']
         self.command_execute(command_DNS2)
