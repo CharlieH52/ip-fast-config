@@ -1,7 +1,9 @@
 from time import sleep
+from UsefullFunctions import FileManager
 from IPFunctions import IPFunctions
 
 ifun = IPFunctions()
+man = FileManager()
 
 def first_configuration(input):
     ifun.normal_config_ip(ip)
@@ -14,6 +16,19 @@ def first_configuration(input):
 if __name__ == '__main__':
     PRODUCTION_MODE = True
     if PRODUCTION_MODE == True:
+        if not man.is_valid_directory(ifun.config_path):
+            man.make_new_directory(ifun.config_path)
+            with open(ifun.file_path, 'w') as file:
+                file.write(
+                    'NAME= \n'
+                    'IP= \n'
+                    'MASK= \n'  
+                    'GATE= \n' 
+                    'DNS1= \n'
+                    'DNS2= '
+                )
+
+
         ip = input("Ingresa la nueva direccion: ")
         first_configuration(ip)
 
