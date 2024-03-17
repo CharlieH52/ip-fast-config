@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-class IPFunctions():
+class IPFunctions:
     def __init__(self):
         self.dictionary = self.check_base_config()
 
@@ -28,7 +28,7 @@ class IPFunctions():
         return dictionary
         
     def command_execute(self, command_sequence):
-        subprocess.run(command_sequence, shell=True)
+        subprocess.run(command_sequence)
 
     def config_ip(self, input, reboot):
         dictionary = self.dictionary()
@@ -45,5 +45,5 @@ class IPFunctions():
         self.check_base_config()
         command_DNS1 = ['netsh', 'interface', 'ipv4', 'set', 'dnsservers', f'{dictionary['NAME']}', 'static', f'{dictionary['DNS1']}', 'primary']
         self.command_execute(command_DNS1)
-        command_DNS2 = ['netsh', 'interface', 'ipv4', 'add', 'dnsservers', f'{dictionary['NAME']}', f'{dictionary['DNS2']}']
+        command_DNS2 = ['netsh', 'interface', 'ipv4', 'add', 'dnsservers', f'{self.dictionary['NAME']}', f'{self.dictionary['DNS2']}']
         self.command_execute(command_DNS2)

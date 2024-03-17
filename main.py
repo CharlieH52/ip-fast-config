@@ -1,3 +1,4 @@
+from time import sleep
 from IPFunctions import IPFunctions
 
 # Compilation code:
