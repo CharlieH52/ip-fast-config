@@ -46,13 +46,13 @@ class FileManager:
         return subprocess.getoutput(command_line).split('\n')
 
     # Carga y lee un diccionario.
-    def dictionary_reader(self, file_path):
+    def dictionary_reader(self, dict_var, file_path):
         try:
             with open(file_path, 'r') as file:
                 for items in file.readlines():
                     key, name = items.strip().split('= ')
-                    self.dictionary[key] = name
-                return self.dictionary
+                    dict_var[key] = name
+                return dict_var
             
         except FileNotFoundError as e:
             make_log = f'No se ha localizado el archivo diccionario. {e}'
