@@ -25,7 +25,7 @@ You can modify the dictionary and command variables to match your network standa
 >
 > For most common ***IPs*** configuration, only change the last field of **IP**.
 >
-> **EXAMPLE**
+> **CONFIGURATION EXAMPLE**
 >```
 > base_config = {
 >    'NAME': 'Ethernet',        # Default interface name.
@@ -37,3 +37,13 @@ You can modify the dictionary and command variables to match your network standa
 >}
 >```
 > Before compile.. Configure the ***base_config*** dictionary with your standard configuration.
+
+## # Pyinstaller
+> [!NOTE]
+>
+> I ever use this line to build my program with ***Pyinstaller***:
+>
+> ```
+>   pyinstaller --onefile --clean --name='[program-name]' main.py
+> ```
+>
